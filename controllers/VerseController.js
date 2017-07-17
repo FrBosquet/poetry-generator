@@ -3,35 +3,33 @@ const googleTTS = require('google-tts-api');
 const http = require('https');
 const fs = require('fs');
 const uniqueFilename = require('unique-filename');
+const User = require('../models/Word');
+
+function randomWordWithType(words, type){
+  let wordsOfType = words.filter((obj)=> obj.type == type);
+  let index = Math.floor(Math.random()*wordsOfType.length);
+  return wordsOfType[index].content;
+}
+
+function verse(words){
+  return randomWordWithType(words, 'who') + " " +
+    randomWordWithType(words, 'adj') + " quiero " +
+    randomWordWithType(words, 'what') + " " +
+    randomWordWithType(words, 'how') + " " +
+    randomWordWithType(words, 'where') + " " +
+    randomWordWithType(words, 'when');
+}
 
 module.exports = {
   index: (req, res, next) => {
 
     var who, adj, what, how, where, when;
 
-    who = ['mami', 'perra', 'gata', 'mi amol', 'linda', 'esposa', 'colegiala','mujer', 'perra sarnosa', 'mamita', 'mi par'];
-    adj = ['linda', 'preciosa', 'tierna', 'caliente', 'tenebrosa', 'guapa', 'sexy', 'fogosa', 'de hielo','electrica'];
-    what = ['perrear', 'perrearte', 'darte','amarte','destruirte','violentarte','hacerte el amor','jambiarte','hacerlo','bailar','menearme'];
-    how = ['duro', 'fuerte','bien suave', 'sin censura','despacito','con ritmo','a lo cubano','a lo latino','con ternura','sin fin','hasta abajo'];
-    where = ['en tu casa','en tu coche', 'en la party','en la disco', 'en el malecon','en el barrio','en un burdel','en el parque','en mi yate', 'en el hood'];
-    when = ['hasta el amanecer','toda la noche','toda la semana','el fin de semana','hasta morir','por la eternidad','hasta el final'];
+    User.find((err, words) => {
+      if(err) next(err);
 
-    function randomItem(arr){
-      return arr[Math.floor(Math.random()*arr.length)];
-    }
-
-    function verse(){
-      return randomItem(who) + " " +
-        randomItem(adj) + " quiero " +
-        randomItem(what) + " " +
-        randomItem(how) + " " +
-        randomItem(where) + " " +
-        randomItem(when);
-    }
-
-    let newVerse = verse();
-
-    googleTTS(newVerse, 'es', 0.8)
+      let newVerse = verse(words);
+      googleTTS(newVerse, 'es', 0.8)
       .then(function (url) {
         var filename = uniqueFilename("public/verses");
         console.log(filename);
@@ -45,12 +43,12 @@ module.exports = {
 
         setTimeout(function(){
           res.render('verse/index', { title:"Random verse", verse: newVerse, file: filename.replace('public/', '') + '.mp3'})
-        },200);
+        },1000);
       })
       .catch(function (err) {
-          console.error(err.stack);
-          next(err);
-        }
-      )
+        console.error(err.stack);
+        next(err);
+      }
+    )});
   }
 }
