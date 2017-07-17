@@ -21,6 +21,15 @@ const words = [{
   content: 'caliente',
   type: 'adj'
 }, {
+  content: 'quiero',
+  type: 'verb'
+}, {
+  content: 'deseo',
+  type: 'verb'
+}, {
+  content: 'volvería',
+  type: 'verb'
+}, {
   content: 'perrear',
   type: 'what'
 }, {
