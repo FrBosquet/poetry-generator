@@ -1,4 +1,8 @@
-const TTS = require('./TTS');
+// const TTS = require('./TTS');
+const googleTTS = require('google-tts-api');
+const http = require('https');
+const fs = require('fs');
+const uniqueFilename = require('unique-filename');
 
 module.exports = {
   index: (req, res, next) => {
@@ -27,10 +31,26 @@ module.exports = {
 
     let newVerse = verse();
 
-    let fileName = TTS(newVerse);
+    googleTTS(newVerse, 'es', 0.8)
+      .then(function (url) {
+        var filename = uniqueFilename("public/verses");
+        console.log(filename);
+        var file = fs.createWriteStream(filename+'.mp3');
 
-    console.log("En VerseController filename vale", fileName);
+        var request = http.get(url, function(response) {
+          response.pipe(file);
+        });
 
-    res.render('verse/index', { title:"Random verse", verse: newVerse, file: fileName})
+        console.log("En tts file vale", filename);
+
+        setTimeout(function(){
+          res.render('verse/index', { title:"Random verse", verse: newVerse, file: filename.replace('public/', '') + '.mp3'})
+        },200);
+      })
+      .catch(function (err) {
+          console.error(err.stack);
+          next(err);
+        }
+      )
   }
 }

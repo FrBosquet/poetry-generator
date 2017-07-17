@@ -4,9 +4,8 @@ var fs = require('fs');
 var uniqueFilename = require('unique-filename');
 
 module.exports = function(verse){
-  return new Promise(
     console.log(verse);
-    googleTTS(verse, 'es', 0.8)
+    return googleTTS(verse, 'es', 0.8)
       .then(function (url) {
         var filename = uniqueFilename("public/verses");
         console.log(filename);
@@ -15,10 +14,10 @@ module.exports = function(verse){
           response.pipe(file);
         });
         console.log("En tts file vale", filename);
-        resolve(filename);
+        return filename;
       })
       .catch(function (err) {
           console.error(err.stack);
         }
-      ))
+      )
     };

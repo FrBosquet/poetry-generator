@@ -3,5 +3,5 @@ extends ../layout
 block content
   h1=title
   p=verse
-  p=file
-  p Hola don pepito #{file}
+  audio(controls='', autoplay='')
+      source(src='#{file}', type='audio/mpeg')
