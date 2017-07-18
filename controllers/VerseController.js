@@ -19,30 +19,39 @@ function verse(words){
     randomWordWithType(words, 'when');
 }
 
+function verseToFile( verse ){
+    return new Promise( (resolve,reject) => {
+      googleTTS( verse , 'es', 0.8)
+        .then(function (url) {
+          var filename = uniqueFilename("public/verses");
+          console.log(filename);
+          var file = fs.createWriteStream(filename+'.mp3');
+
+          var request = http.get(url, function(response) {
+            response.pipe(file)
+              .on('finish', ()=>{
+                resolve(filename.replace('public/', '') + '.mp3');
+              })
+          })
+      })
+  })
+}
+
 module.exports = {
   index: (req, res, next) => {
 
     var who, adj, what, how, where, when;
 
-    Word.find((err, words) => {
-      if(err) next(err);
-
-      let newVerse = verse(words);
-      googleTTS(newVerse, 'es', 0.8)
-      .then(function (url) {
-        var filename = uniqueFilename("public/verses");
-        console.log(filename);
-        var file = fs.createWriteStream(filename+'.mp3');
-
-        var request = http.get(url, function(response) {
-          response.pipe(file);
-        });
-
-        console.log("En tts file vale", filename);
-
-        setTimeout(function(){
-          res.render('verse/index', { title:"Random verse", verse: newVerse, file: filename.replace('public/', '') + '.mp3'})
-        },1000);
+    Word.find().exec()
+      .then( words => {
+        let newVerse = verse(words);
+        verseToFile(newVerse)
+          .then( fileName => {
+            return res.render('verse/index', {
+              title:"Random verse",
+              verse: newVerse,
+              file: fileName
+            })
       })
       .catch(function (err) {
         console.error(err.stack);

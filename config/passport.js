@@ -3,9 +3,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const User = require('../models/User');
 const dotenv = require ("dotenv").load();
-const app = require('express')();
 
-module.exports = function() {
+module.exports = function( app ) {
   passport.serializeUser((user, cb) => {
     console.log('dos');
     cb(null, user.id);
@@ -47,7 +46,7 @@ module.exports = function() {
       return next(null, user);
     });
   }));
+  console.log("Line 49", app);
   app.use(passport.initialize());
   app.use(passport.session());
-
 };

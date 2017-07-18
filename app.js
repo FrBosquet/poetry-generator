@@ -7,9 +7,7 @@ const User = require('./models/User');
 
 require('dotenv').load();
 require('./config/express')(app);
-require('./config/passport')();
-
-
+require('./config/passport')(app);
 
 const index = require('./routes/index');
 const verse = require('./routes/verse');
@@ -19,8 +17,6 @@ const word = require('./routes/word');
 app.use('/', index);
 app.use('/verse', verse);
 app.use('/auth', auth);
-
-
 
 require('./config/error-handler')(app);
 module.exports = app;
