@@ -13,9 +13,15 @@ const index = require('./routes/index');
 const verse = require('./routes/verse');
 const auth = require('./routes/auth');
 
+<<<<<<< HEAD
+app.use('/', index)
+app.use('/verse', verse)
+// app.use('/auth', auth)
+=======
 app.use('/', index);
 app.use('/verse', verse);
 app.use('/auth', auth);
+>>>>>>> d6cde6dc47325ca232771ef5623c17bd1fbdccbc
 
 app.use(session({
   secret: "our-passport-local-strategy-app",
