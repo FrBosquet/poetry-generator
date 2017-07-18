@@ -11,7 +11,7 @@ const auth = require('./routes/auth')
 
 app.use('/', index)
 app.use('/verse', verse)
-app.use('/auth', auth)
+// app.use('/auth', auth)
 
 require('./config/error-handler')(app)
 module.exports = app
