@@ -12,5 +12,6 @@ router.get('/deleteword/:id', WordController.deleteOne);
 
 router.get('/userwords/:id', WordController.findUserWords);
 
+router.get('/listtype/:type', WordController.findTypeOfWords);
 
 module.exports = router;

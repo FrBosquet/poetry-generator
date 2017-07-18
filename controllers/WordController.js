@@ -85,7 +85,7 @@ module.exports = {
       user_id: userId
     }, function(err, docs) {
       if (err) {
-        console.log("error en listAll words");
+        console.log("error en find user words");
       } else {
         res.render('word/list', {
           list: docs
@@ -93,4 +93,18 @@ module.exports = {
       }
     });
   },
+  findTypeOfWords: (req, res, next) => {
+      const wordType = req.params.type;
+      Word.find({
+        type: wordType
+      }, function(err, docs) {
+        if (err) {
+          console.log("error en find type of words");
+        } else {
+          res.render('word/list', {
+            list: docs
+          });
+        }
+      });
+    },
 };
