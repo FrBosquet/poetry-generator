@@ -14,12 +14,14 @@ require('./config/passport')();
 const index = require('./routes/index');
 const verse = require('./routes/verse');
 const auth = require('./routes/auth');
+const word = require('./routes/word');
 
 app.use('/', index);
 app.use('/verse', verse);
 app.use('/auth', auth);
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./config/error-handler')(app);
 module.exports = app;

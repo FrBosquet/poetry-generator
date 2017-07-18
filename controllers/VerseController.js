@@ -1,9 +1,8 @@
-// const TTS = require('./TTS');
 const googleTTS = require('google-tts-api');
 const http = require('https');
 const fs = require('fs');
 const uniqueFilename = require('unique-filename');
-const User = require('../models/Word');
+const Word = require('../models/Word');
 
 function randomWordWithType(words, type){
   let wordsOfType = words.filter((obj)=> obj.type == type);
@@ -25,7 +24,7 @@ module.exports = {
 
     var who, adj, what, how, where, when;
 
-    User.find((err, words) => {
+    Word.find((err, words) => {
       if(err) next(err);
 
       let newVerse = verse(words);
