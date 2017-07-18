@@ -11,6 +11,8 @@ html
         a(href='/auth/logout').button logout
       else
         h2 hello guest
-        a(href='/auth/login').button login
+        div
+          a(href='/auth/login').button login
+          a(href='/auth/facebook').button facebook login
     div.page-content
       block content

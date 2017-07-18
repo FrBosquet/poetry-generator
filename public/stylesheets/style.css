@@ -25,6 +25,7 @@ header h2{
 }
 
 .button{
+  margin: 10px;
   padding: 10px;
   background-color: #bafada;
   border-radius: 10px;
