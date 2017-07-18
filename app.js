@@ -17,6 +17,7 @@ const word = require('./routes/word');
 app.use('/', index);
 app.use('/verse', verse);
 app.use('/auth', auth);
+app.use('/words', word);
 
 require('./config/error-handler')(app);
 module.exports = app;
