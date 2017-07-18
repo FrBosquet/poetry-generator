@@ -1,8 +1,31 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0px;
 }
 
 a {
   color: #00B7FF;
+}
+
+header{
+  padding: 15px;
+  background-color: #beceda;
+  display: flex;
+  justify-content: space-between;
+}
+
+header h2{
+  font-size: 1em;
+}
+
+.page-content{
+  margin: 0 auto;
+  width: 780px;
+  max-width: calc(100% - 15px);
+}
+
+.button{
+  padding: 10px;
+  background-color: #bafada;
+  border-radius: 10px;
 }

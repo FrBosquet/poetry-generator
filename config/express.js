@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const session = require('express-session');
 const flash = require('connect-flash');
+const MongoStore = require('connect-mongo')(session);
 
 module.exports = function(app){
 
@@ -23,7 +24,11 @@ module.exports = function(app){
   app.use(session({
     secret: "our-passport-local-strategy-app",
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore( {
+      mongooseConnection: mongoose.connection,
+      ttl: 24*3600
+    })
   }));
   app.use(flash());
 };

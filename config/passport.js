@@ -30,8 +30,6 @@ module.exports = function( app ) {
     User.findOne({name: username})
       .exec()
       .then( user =>{
-        console.log("El usuario al autenticar es : ", user, " El username es ", username);
-
         if (!user) {
           return next(null, false, {
             message: "Incorrect username"
@@ -43,7 +41,7 @@ module.exports = function( app ) {
             message: "Incorrect password"
           });
         }
-        console.log('uno');
+
         return next(null, user);
       })
       .catch(err=> next(err))
@@ -51,4 +49,9 @@ module.exports = function( app ) {
 
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.use((req, res, next)=>{
+    res.locals.user = req.user;
+    next();
+  })
 };
