@@ -12,7 +12,8 @@ function randomWordWithType(words, type){
 
 function verse(words){
   return randomWordWithType(words, 'who') + " " +
-    randomWordWithType(words, 'adj') + " quiero " +
+    randomWordWithType(words, 'adj') + " " +
+    randomWordWithType(words, 'verb') + " " +
     randomWordWithType(words, 'what') + " " +
     randomWordWithType(words, 'how') + " " +
     randomWordWithType(words, 'where') + " " +
