@@ -1,3 +1,4 @@
+const passport = require("passport");
 const router = require('express').Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
@@ -7,7 +8,37 @@ router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", (req, res, next) => {
+function checkNameSignUp(req,res,next) {
+  const name = req.body.name;
+  User.findOne({
+    name: name,
+  }, "name", (err, user) =>{
+    if (user !== null) {
+      res.render("auth/signup", {
+        message: "The name already exists, try again"
+    });
+  } else {
+    next();
+  }
+  });
+}
+
+function checkEmailSignUp(req,res,next) {
+  const email = req.body.email;
+  User.findOne({
+      email: email,
+    }, "email", (err, user) => {
+      if (user !== null) {
+        res.render("auth/signup", {
+          message: "The email already exists, try again"
+        });
+      } else {
+        next();
+      }
+    });
+}
+
+router.post("/signup", checkNameSignUp, checkEmailSignUp, (req, res, next) => {
   const name = req.body.name;
   const password = req.body.password;
   const email = req.body.email;
@@ -18,36 +49,14 @@ router.post("/signup", (req, res, next) => {
     });
     return;
   }
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
 
-  User.find({
-    name: name,
-  }, "name", (err, user) => {
-    if (user.name !== null) {
-      res.render("auth/signup", {
-        message: "The name already exists, try again"
+      const newUser = User({
+        name: name,
+        password: hashPass,
+        email: email
       });
-      return;
-    }
-  });
-
-  User.find({
-    email: email,
-  }, "email", (err, user) => {
-    if (user.name !== null) {
-      res.render("auth/signup", {
-        message: "The email already exists, try again"
-      });
-      return;
-    }
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
-
-    const newUser = User({
-      name: name,
-      password: hashPass,
-      email: email
-    });
-
       newUser.save((err) => {
         if (err) {
           res.render("auth/signup", {
@@ -56,9 +65,19 @@ router.post("/signup", (req, res, next) => {
         } else {
           res.redirect("/");
         }
-      });
-  });
+    });
 });
+
+router.get("/login", (req, res, next) => {
+  res.render("auth/login");
+  console.log('dentro get login');
+});
+
+router.post("/login", passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/auth/login",
+  passReqToCallback: true
+}));
 
 
 module.exports = router;
