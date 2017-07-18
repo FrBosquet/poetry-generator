@@ -5,6 +5,7 @@ const User = require('../models/User');
 const dotenv = require ("dotenv").load();
 
 module.exports = function( app ) {
+
   passport.serializeUser((user, cb) => {
     console.log('dos');
     cb(null, user.id);
@@ -24,29 +25,30 @@ module.exports = function( app ) {
 
 
   passport.use('local', new LocalStrategy((username, password, next) => {
-    User.findOne({
-      username: name
-    }, (err, user) => {
-      if (err) {
-        return next(err);
-      }
+    console.log("Buscando usuario", username);
 
-      if (!user) {
-        return next(null, false, {
-          message: "Incorrect username"
-        });
-      }
+    User.findOne({name: username})
+      .exec()
+      .then( user =>{
+        console.log("El usuario al autenticar es : ", user, " El username es ", username);
 
-      if (!bcrypt.compareSync(password, user.password)) {
-        return next(null, false, {
-          message: "Incorrect password"
-        });
-      }
-      console.log('uno');
-      return next(null, user);
-    });
+        if (!user) {
+          return next(null, false, {
+            message: "Incorrect username"
+          });
+        }
+
+        if (!bcrypt.compareSync(password, user.password)) {
+          return next(null, false, {
+            message: "Incorrect password"
+          });
+        }
+        console.log('uno');
+        return next(null, user);
+      })
+      .catch(err=> next(err))
   }));
-  console.log("Line 49", app);
+
   app.use(passport.initialize());
   app.use(passport.session());
 };
