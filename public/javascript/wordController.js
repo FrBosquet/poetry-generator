@@ -3,7 +3,7 @@ $(document).ready(()=>{
       e.preventDefault();
       let data = $(e.target).serialize();
       $.ajax({
-        url: '/word/new',
+        url: '/words/new',
         dataType: 'JSON',
         data: data,
         method: 'POST'
@@ -14,5 +14,11 @@ $(document).ready(()=>{
         $('#formSelect').val('who');
         $('#formContent').val('');
       });
-    })
-})
+    });
+    // $("#delete").on('click', (()=>{
+    //   $.ajax({
+    //   url: `${this.BASE_URL}/characters`,
+    //   method: "GET",
+    //   });
+    // }));
+});

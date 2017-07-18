@@ -5,7 +5,6 @@ module.exports = {
     res.render('word/index', {
       title: "Words"
     });
-
   },
   new: (req, res, next) => {
     console.log("Received request with data: ", req.body);
@@ -45,7 +44,7 @@ module.exports = {
       });
   },
   listAll: (req, res, next) => {
-    Word.find({}, function(err, docs) {
+    Word.find({}, ((err, docs) => {
       if (err) {
         console.log("error en listAll words");
       } else {
@@ -53,7 +52,7 @@ module.exports = {
           list: docs
         });
       }
-    });
+    }));
   },
   listOne: (req, res, next) => {
     const wordId = req.params.id;

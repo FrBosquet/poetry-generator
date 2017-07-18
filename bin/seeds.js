@@ -87,7 +87,7 @@ const words = [{
   type: 'when',
   user_id: 4356343256234567
 }, {
-  content: 'quier',
+  content: 'quiero',
   type: 'verb',
   user_id: 4343256
 }, {
