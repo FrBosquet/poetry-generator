@@ -6,6 +6,8 @@ const path = require('path');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 module.exports = function(app){
 
@@ -18,4 +20,10 @@ module.exports = function(app){
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cookieParser());
   app.use(express.static(config.rootPath+'public'));
+  app.use(session({
+    secret: "our-passport-local-strategy-app",
+    resave: true,
+    saveUninitialized: true
+  }));
+  app.use(flash());
 };

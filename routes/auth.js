@@ -69,15 +69,19 @@ router.post("/signup", checkNameSignUp, checkEmailSignUp, (req, res, next) => {
 });
 
 router.get("/login", (req, res, next) => {
-  res.render("auth/login");
-  console.log('dentro get login');
+  res.render("auth/login", { "message": req.flash("error") });
 });
 
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/auth/login",
+  failureFlash: true,
   passReqToCallback: true
 }));
+
+router.get("/profile", (req, res, next) => {
+  res.render("auth/profile");
+});
 
 
 module.exports = router;
