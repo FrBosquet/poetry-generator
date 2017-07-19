@@ -25,12 +25,13 @@ function verseToFile( verse ){
 
 module.exports = {
   index: (req, res, next) => {
-
     var who, adj, what, how, where, when;
 
     Word.find().exec()
       .then( words => {
+        console.log("Pre verse");
         let newVerse = Verse(words);
+        console.log("Post verse");
         verseToFile(newVerse)
           .then( fileName => {
             return res.render('verse/index', {

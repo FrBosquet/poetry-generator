@@ -5,9 +5,9 @@ router.get('/new', WordController.index);
 
 router.post('/new', WordController.new);
 
-router.get('/listall', WordController.listAll);
+router.get('/list', WordController.listAll);
 
-router.get('/list/:id', WordController.listOne);
+router.get('/show/:id', WordController.listOne);
 
 router.get('/delete/:id', WordController.deleteOne);
 

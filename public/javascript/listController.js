@@ -8,8 +8,8 @@ $(document).ready(()=>{
 
   $('button#delete').on('click',(e)=>{
     let targetId = $(e.target).attr('wordid');
-    let item = e.target.parentNode;
-    console.log(item, father);
+    let item = e.target.parentNode.parentNode;
+    console.log(item);
     $.ajax({
       url: `/words/delete/${targetId}`,
       method: 'GET'
