@@ -13,6 +13,7 @@ module.exports = {
     let data = {
       content: req.body.content.toLowerCase(),
       type: req.body.type,
+      user_id: req.user._id
     };
     console.log("Built query: ", data);
 
@@ -46,7 +47,10 @@ module.exports = {
       });
   },
   listAll: (req, res, next) => {
-    Word.find({}, ((err, docs) => {
+    const userId = req.user._id;
+    Word.find({
+      user_id: userId
+    }, ((err, docs) => {
       if (err) {
         console.log("error en listAll words");
       } else {

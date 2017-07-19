@@ -4,7 +4,7 @@ const WordController = require('../controllers/WordController');
 router.get('/new', WordController.index);
 router.post('/new', WordController.new);
 
-router.get('/listallwords', WordController.listAll);
+router.get('/listall', WordController.listAll);
 
 router.get('/listword/:id', WordController.listOne);
 
