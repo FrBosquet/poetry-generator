@@ -2,6 +2,7 @@ const router = require('express').Router();
 const WordController = require('../controllers/WordController');
 
 router.get('/new', WordController.index);
+
 router.post('/new', WordController.new);
 
 router.get('/listall', WordController.listAll);

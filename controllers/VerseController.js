@@ -3,26 +3,11 @@ const http = require('https');
 const fs = require('fs');
 const uniqueFilename = require('unique-filename');
 const Word = require('../models/Word');
-
-function randomWordWithType(words, type){
-  let wordsOfType = words.filter((obj)=> obj.type == type);
-  let index = Math.floor(Math.random()*wordsOfType.length);
-  return wordsOfType[index].content;
-}
-
-function verse(words){
-  return randomWordWithType(words, 'who') + " " +
-    randomWordWithType(words, 'adj') + " " +
-    randomWordWithType(words, 'verb') + " " +
-    randomWordWithType(words, 'what') + " " +
-    randomWordWithType(words, 'how') + " " +
-    randomWordWithType(words, 'where') + " " +
-    randomWordWithType(words, 'when');
-}
+const Verse = require('./VerseComposer');
 
 function verseToFile( verse ){
     return new Promise( (resolve,reject) => {
-      googleTTS( verse , 'es', 0.8)
+      googleTTS( verse , 'es', 1.2)
         .then(function (url) {
           var filename = uniqueFilename("public/verses");
           console.log(filename);
@@ -45,7 +30,7 @@ module.exports = {
 
     Word.find().exec()
       .then( words => {
-        let newVerse = verse(words);
+        let newVerse = Verse(words);
         verseToFile(newVerse)
           .then( fileName => {
             return res.render('verse/index', {

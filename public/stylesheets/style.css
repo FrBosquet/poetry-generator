@@ -1,11 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(https://fonts.googleapis.com/css?family=Aguafina+Script:400);
 
+*{
+  outline: none;
+}
+
 body {
   font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
   margin: 0px;
   background-image: url('/images/welcome.jpg');
   background-size: cover;
+  font-size: 18px;
 }
 
 @media(max-width: 1400px) {
@@ -19,6 +24,10 @@ a {
   color: #00B7FF;
   font-weight: bold;
   text-decoration: none;
+}
+
+button{
+  cursor: pointer;
 }
 
 header{
@@ -151,7 +160,7 @@ form{
     display: none;
   }
 
-  header h2, div{
-    width: 50%;
+  header h2, header div{
+    width: auto;
   }
 }
