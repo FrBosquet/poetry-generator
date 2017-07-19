@@ -8,7 +8,10 @@ html
     header
       if user != undefined
         h2 hello #{user.name}
-        a(href='/auth/logout').button logout
+        div
+          a(href='/verse').button new verse
+          a(href='/auth/profile').button my profile
+          a(href='/auth/logout').button logout
       else
         h2 hello guest
         div

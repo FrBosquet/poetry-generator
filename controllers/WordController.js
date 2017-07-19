@@ -8,9 +8,11 @@ module.exports = {
   },
   new: (req, res, next) => {
     console.log("Received request with data: ", req.body);
+    console.log("User is ", req.user);
+
     let data = {
       content: req.body.content.toLowerCase(),
-      type: req.body.type
+      type: req.body.type,
     };
     console.log("Built query: ", data);
 

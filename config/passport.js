@@ -27,8 +27,6 @@ module.exports = function( app ) {
 
   passport.use('local', new LocalStrategy((username, password, next) => {
     console.log("Buscando usuario", username);
-
-
     User.findOne({name: username})
       .exec()
       .then( user =>{
@@ -37,13 +35,11 @@ module.exports = function( app ) {
             message: "Incorrect username"
           });
         }
-
         if (!bcrypt.compareSync(password, user.password)) {
           return next(null, false, {
             message: "Incorrect password"
           });
         }
-
         return next(null, user);
       })
       .catch( err=> next(err))

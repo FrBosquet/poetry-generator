@@ -2,22 +2,20 @@ extends ../layout
 
 block content
   h1=title
-  p hello
   form#newWordForm
-      label(for='type') Tipo
-      select(name='type')#formSelect
-        option(value='who') Sujeto
-        option(value='verb') Intencion
-        option(value='adj') Adjetivo
-        option(value='what') Accion
-        option(value='how') Modo
-        option(value='where') Lugar
-        option(value='when') Tiempo
-      br
-      label(for='content') Contenido
-      br
-      input(name='content', type='text')#formContent
-      input(type='submit', value='enviar')
-  span#message
+    label(for='type') Tipo
+    select(name='type')#formSelect.button
+      option(value='who') Sujeto
+      option(value='verb') Intencion
+      option(value='adj') Adjetivo
+      option(value='what') Accion
+      option(value='how') Modo
+      option(value='where') Lugar
+      option(value='when') Tiempo
+    label(for='content') Contenido
+    input(name='content', type='text' placeholder='Algo como "damisela"')#formContent.input
+    br
+    input(type='submit', value='enviar').button
+    span#message
   script(src='https://code.jquery.com/jquery-3.2.1.min.js')
   script(src='/javascript/wordController.js')
