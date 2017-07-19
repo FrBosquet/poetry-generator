@@ -4,6 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt        = require("bcrypt");
 const User = require('./models/User');
+const ensureLogin = require("connect-ensure-login");
 
 require('dotenv').load();
 require('./config/express')(app);
@@ -15,9 +16,9 @@ const auth = require('./routes/auth');
 const word = require('./routes/word');
 
 app.use('/', index);
-app.use('/verse', verse);
+app.use('/verse', ensureLogin.ensureLoggedIn('/auth/login'), verse);
 app.use('/auth', auth);
-app.use('/words', word);
+app.use('/words', ensureLogin.ensureLoggedIn('/auth/login'), word);
 
 require('./config/error-handler')(app);
 module.exports = app;
