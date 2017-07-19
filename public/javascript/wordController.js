@@ -1,5 +1,5 @@
 $(document).ready(()=>{
-    $("#newWordForm").on('submit', (e)=>{
+    $("#form").on('submit', (e)=>{
       e.preventDefault();
       let data = $(e.target).serialize();
       $.ajax({

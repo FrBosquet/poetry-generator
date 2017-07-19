@@ -7,14 +7,14 @@ html
   body
     header
       if user != undefined
-        h2 hello #{user.name}
+        h2 Hola #{user.name}
         h2.title Poetry Generator
         div
           a(href='/verse').button new verse
           a(href='/auth/profile').button my profile
           a(href='/auth/logout').button logout
       else
-        h2 hello guest
+        h2 Hola invitado
         h2.title Poetry Generator
         div
           a(href='/auth/login').button login

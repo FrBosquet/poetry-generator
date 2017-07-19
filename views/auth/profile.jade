@@ -1,5 +1,11 @@
 extends ../layout
 
 block content
-  h2 Profile
-  a(href='/words/listall') My words
+  h2 Mi perfil
+  h3= user.name
+  li
+    a(href='/words/list') Mis palabras
+  li
+    a(href='/words/new') Nueva palabra
+  li
+    a(href='/') Mis versos
