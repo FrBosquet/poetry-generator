@@ -26,11 +26,11 @@ $(document).ready(()=>{
          case 'who':
           placeHolder = 'Algo como "damisela"';
          break;
-         case 'verb':
-          placeHolder = 'Algo como "desearía"';
-         break;
          case 'adj':
           placeHolder = 'Algo como "bonita"';
+        break;
+         case 'verb':
+          placeHolder = 'Algo como "desearía"';
          break;
          case 'what':
           placeHolder = 'Algo como "quererte"';
