@@ -6,11 +6,11 @@ router.post('/new', WordController.new);
 
 router.get('/listall', WordController.listAll);
 
-router.get('/listword/:id', WordController.listOne);
+router.get('/list/:id', WordController.listOne);
 
-router.get('/deleteword/:id', WordController.deleteOne);
+router.get('/delete/:id', WordController.deleteOne);
 
-router.get('/userwords/:id', WordController.findUserWords);
+router.get('/byUser/:id', WordController.findUserWords);
 
 router.get('/listtype/:type', WordController.findTypeOfWords);
 
