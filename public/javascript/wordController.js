@@ -15,10 +15,11 @@ $(document).ready(()=>{
         $('#formContent').val('');
       });
     });
-    // $("#delete").on('click', (()=>{
-    //   $.ajax({
-    //   url: `${this.BASE_URL}/characters`,
-    //   method: "GET",
-    //   });
-    // }));
+    $(":button").attr("wordid").on('click', (()=>{
+      console.log("hola botones");
+      // $.ajax({
+      // url: `${this.BASE_URL}/characters`,
+      // method: "GET",
+      // });
+    }));
 });

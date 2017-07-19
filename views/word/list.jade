@@ -4,5 +4,5 @@ block content
   h1 All words
   each word in list
     li  Word: #{word.content}, type: #{word.type}
-        button(wordid='#{word._id}')#detail Get details about this song
+        button(wordid='detail#{word._id}')#detail Get details about this song
         button#delete Delete me
