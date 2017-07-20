@@ -3,7 +3,7 @@ const Word = require('../models/Word');
 module.exports = {
   index: (req, res, next) => {
     res.render('word/index', {
-      title: "Words"
+      title: "Palabras"
     });
   },
   new: (req, res, next) => {
@@ -25,7 +25,7 @@ module.exports = {
         console.log("La palabra encontrada es: ", foundWord);
         if (foundWord.length !== 0) {
           res.send({
-            msg: "La palabra ya existe en la base de datos"
+            msg: "La palabra ya existe"
           });
           return;
         }
@@ -34,15 +34,15 @@ module.exports = {
 
         newWord.save()
           .then(() => res.send({
-            msg: "Se salvo en la DB"
+            msg: "Palabra guardada"
           }))
           .catch(() => res.send({
-            msg: "No se pudo salvar en la DB"
+            msg: "No se pudo guardar tu palabra, inténtalo otra vez."
           }));
       })
       .catch(() => {
         res.send({
-          msg: "Ocurrio un error al acceder a la base de datos"
+          msg: "Ocurrio un error al guardar tu palabra, inténtalo otra vez."
         });
       });
   },

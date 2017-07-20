@@ -1,16 +1,16 @@
 extends ../layout
 
 block content
-  h2 Signup
+  h2 Regístrate
   form(action='/auth/signup', method='POST')#form
     label(for='username') Nombre de usuario:
     input#username(type='text', name='name', placeholder='Introduce tu nombre de usuario').input
-    label(for='password') Password:
+    label(for='password') Contraseña:
     input#password(type='password', name='password', placeholder='Introduce tu contraseña').input
     label(for='email') E-mail:
-    input#email(type='text', name='email', placeholder='Type your e-mail').input
+    input#email(type='text', name='email', placeholder='Introduce tu e-mail').input
     br
-    button.button Create account
+    button.button Crear cuenta
     p=message
     p.account-message
     br

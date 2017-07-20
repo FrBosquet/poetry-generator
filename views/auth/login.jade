@@ -1,15 +1,15 @@
 extends ../layout
 
 block content
-  h2 Login
+  h2 Iniciar sesión
   form(action='/auth/login', method='POST')#form
-    label(for='username') Username:
+    label(for='username') Usuario:
     input(type='text', name='username').input
 
-    label(for='password') Password:
+    label(for='password') Contraseña:
     input(type='password', name='password').input
 
-    input(type='submit', value='Log In').button
+    input(type='submit', value='Iniciar sesión').button
     p=message
 
     br

@@ -63,7 +63,6 @@ module.exports = {
     }));
   },
   save: (req, res, next)=>{
-    console.log(req.body);
     let { content } = req.body;
     let user_id = req.user._id;
 

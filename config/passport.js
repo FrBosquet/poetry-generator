@@ -30,12 +30,12 @@ module.exports = function( app ) {
       .then( user =>{
         if (!user) {
           return next(null, false, {
-            message: "Incorrect username"
+            message: "Nombre de usuario incorrecto"
           });
         }
         if (!bcrypt.compareSync(password, user.password)) {
           return next(null, false, {
-            message: "Incorrect password"
+            message: "Contraseña incorrecta"
           });
         }
         return next(null, user);

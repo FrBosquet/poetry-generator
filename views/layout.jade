@@ -10,14 +10,14 @@ html
         h2 Hola #{user.name}
         h2.title Poetry Generator
         div
-          a(href='/verse').button new verse
-          a(href='/auth/profile').button my profile
-          a(href='/auth/logout').button logout
+          a(href='/verse').button Nuevo verso
+          a(href='/auth/profile').button Mi perfil
+          a(href='/auth/logout').button Cerrar sesión
       else
         h2 Hola invitado
         h2.title Poetry Generator
         div
-          a(href='/auth/login').button login
-          a(href='/auth/facebook').button facebook login
+          a(href='/auth/login').button Iniciar sesión
+          a(href='/auth/facebook').button Iniciar sesión con Facebook
     div.page-content
       block content

@@ -12,7 +12,8 @@ $(document).ready(()=>{
       data: {content, user_id},
       method: 'POST'
     }).then((response)=>{
-      console.log(response);
+      $('button#save').hide();
+      $('#message').text("Tu verso se ha guardado correctamente");
     }).catch((err)=> console.log(err));
   })
 })

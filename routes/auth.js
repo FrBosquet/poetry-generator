@@ -15,7 +15,7 @@ function checkNameSignUp(req,res,next) {
   }, "name", (err, user) =>{
     if (user !== null) {
       res.render("auth/signup", {
-        message: "The name already exists, try again"
+        message: "Este nombre ya existe, prueba con otro"
     });
   } else {
     next();
@@ -30,7 +30,7 @@ function checkEmailSignUp(req,res,next) {
     }, "email", (err, user) => {
       if (user !== null) {
         res.render("auth/signup", {
-          message: "The email already exists, try again"
+          message: "Ya existe una cuenta con este e-mail, prueba con otro"
         });
       } else {
         next();
@@ -45,7 +45,7 @@ router.post("/signup", checkNameSignUp, checkEmailSignUp, (req, res, next) => {
 
   if (name === "" || password === "" || email === "") {
     res.render("auth/signup", {
-      message: "You must fulfill all the fields!"
+      message: "¡Debes rellenar todos los campos!"
     });
     return;
   }
@@ -60,7 +60,7 @@ router.post("/signup", checkNameSignUp, checkEmailSignUp, (req, res, next) => {
       newUser.save((err) => {
         if (err) {
           res.render("auth/signup", {
-            message: "Something went wrong"
+            message: "Parece que algo ha ido mal ..."
           });
         } else {
           res.redirect("/");
