@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1 Mis versos
+  ul
+    each verse in list
+      li
+        span
+          p #{verse.content}
+        span
+          button(verseid='#{verse._id}')#play.button Reprodúceme
+          button(verseid='#{verse._id}')#delete.button Bórrame
+  script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+  script(src='/javascript/verseListController.js')

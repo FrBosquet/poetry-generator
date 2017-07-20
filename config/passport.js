@@ -8,12 +8,10 @@ const dotenv = require ("dotenv").load();
 module.exports = function( app ) {
 
   passport.serializeUser((user, cb) => {
-    console.log('dos');
     cb(null, user.id);
   });
 
   passport.deserializeUser((id, cb) => {
-    console.log('tres');
     User.findOne({
       "_id": id
     }, (err, user) => {

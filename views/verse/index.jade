@@ -5,3 +5,8 @@ block content
   p=verse
   audio(controls='', autoplay='')
       source(src='#{file}', type='audio/mpeg', rel=noreferrer)
+  br
+  if type === 'new'
+    button(content='#{verse}' user_id='#{user._id}')#save.button Salvar este poema
+  script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+  script(src='/javascript/verseController.js')

@@ -1,3 +1,5 @@
+const VerseStructure = require('../models/VerseStructure');
+
 function wordsWichEndWith(words, end){
 	return words.filter((wordCont)=>{
 	  let word = wordCont.content;
@@ -8,6 +10,11 @@ function wordsWichEndWith(words, end){
 function randomWord(words){
   let index = Math.floor(Math.random()*words.length);
   return words[index].content;
+}
+
+function randomStructure( data){
+	let index = Math.floor(Math.random()*data.length);
+  return data[index].structure;
 }
 
 function randomWordWithType(words, type){
@@ -27,11 +34,8 @@ function randomWordWhichRimes(words, type, rime){
 			let content = word.content;
 			let contentEnd = content.slice(content.length - i);
 			let rimeEnd = rime.slice(rime.length - i);
-
-			console.log('Content:',content,'ContentEnd:',contentEnd,'rimeEnd',rimeEnd);
 			return contentEnd === rimeEnd;
 		})
-		console.log(i, candidates);
 		if(candidates.length != 0) break;
 	}
 
@@ -48,42 +52,47 @@ function pushTimes(array, word, times){
 let firstSchema = ['1#_hace tiempo','1@_who','1#_que','1@-where','1@_what','1@_when','1@_where','1@-when'];
 
 function verse(words){
-  let newVerse = [];
-  var rimedWord;
+	return new Promise((resolve, reject)=>{
 
-  console.log("pre loop of schema");
+		let newVerse = [];
+		let rimedWord;
+		VerseStructure.find()
+		.exec()
+		.then(data => {
+			const structure = randomStructure(data);
+			structure.forEach((elm, k)=>{
+				let times = parseInt(elm[0]);
+				let type = elm[1];
+				let rime = elm[2];
+				let cont = elm.slice(3);
 
-  firstSchema.forEach((elm, k)=>{
-    let times = parseInt(elm[0]);
-    let type = elm[1];
-    let rime = elm[2];
-    let cont = elm.slice(3);
 
+				if(type === '@'){
+					let wordToAdd;
 
-    if(type === '@'){
-      let wordToAdd;
+					if(rime === '_'){
+						wordToAdd = randomWordWithType(words, cont);
+					}else{
+						if(!rimedWord){
+							wordToAdd =  randomWordWithType(words, cont);
+							rimedWord = wordToAdd;
+						}else{
+							wordToAdd = randomWordWhichRimes(words, cont, rimedWord);
+						}
+					}
+					for(let i = 0; i < times; i++ ){
+						newVerse.push(wordToAdd);
+					}
+				}else{
+					for(let i = 0; i < times; i++ ){
+						newVerse.push(cont);
+					}
+				}
+			});
 
-      if(rime === '_'){
-        wordToAdd = randomWordWithType(words, cont);
-      }else{
-        if(!rimedWord){
-          wordToAdd =  randomWordWithType(words, cont);
-          rimedWord = wordToAdd;
-        }else{
-					wordToAdd = randomWordWhichRimes(words, cont, rimedWord);
-        }
-      }
-      for(let i = 0; i < times; i++ ){
-        newVerse.push(wordToAdd);
-      }
-    }else{
-      for(let i = 0; i < times; i++ ){
-        newVerse.push(cont);
-      }
-    }
-  })
-
-  return newVerse.join(' ');
+			resolve(newVerse.join(' '));
+		})
+	})
 }
 
 module.exports = verse;
