@@ -8,7 +8,9 @@ block content
         span
           p #{verse.content}
         span
-          button(verseid='#{verse._id}')#play.button Reprodúceme
-          button(verseid='#{verse._id}')#delete.button Bórrame
+          button(verseid='#{verse._id}')#play.button
+            img(src="/images/play.png")
+          button(verseid='#{verse._id}')#delete.button
+            img(src="/images/delete.png")
   script(src='https://code.jquery.com/jquery-3.2.1.min.js')
   script(src='/javascript/verseListController.js')

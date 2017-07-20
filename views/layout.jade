@@ -11,8 +11,10 @@ html
         h2.title Poetry Generator
         div
           a(href='/verse').button Nuevo verso
-          a(href='/auth/profile').button Mi perfil
-          a(href='/auth/logout').button Cerrar sesión
+          a(href='/auth/profile').button
+            img(src="/images/profile.png")
+          a(href='/auth/logout').button
+            img(src="/images/logout.png") 
       else
         h2 Hola invitado
         h2.title Poetry Generator
