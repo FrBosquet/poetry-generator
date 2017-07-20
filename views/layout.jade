@@ -14,12 +14,14 @@ html
           a(href='/auth/profile').button
             img(src="/images/profile.png")
           a(href='/auth/logout').button
-            img(src="/images/logout.png") 
+            img(src="/images/logout.png")
       else
         h2 Hola invitado
         h2.title Poetry Generator
         div
           a(href='/auth/login').button Iniciar sesión
-          a(href='/auth/facebook').button Iniciar sesión con Facebook
+          a(href='/auth/facebook').button
+            img(src="/images/facebook.png")
     div.page-content
       block content
+    div.background

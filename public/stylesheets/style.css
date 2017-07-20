@@ -8,11 +8,19 @@
 body {
   font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
   margin: 0px;
-  background-image: url('/images/welcome.jpg');
-  background-size: cover;
   font-size: 18px;
 }
 
+.background{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-image: url('/images/welcome.jpg');
+  background-size: cover;
+  z-index: -1;
+}
 @media(max-width: 1400px) {
   body{
     background-size: 1400px;
@@ -20,11 +28,12 @@ body {
 }
 
 
-a {
-  color: #00B7FF;
+a, a:link, a:visited {
+  color: black;
   font-weight: bold;
   text-decoration: none;
 }
+
 
 button{
   cursor: pointer;
@@ -32,6 +41,7 @@ button{
 
 header{
   background-color: #beceda;
+  height: 64px;
   box-shadow: 0px 5px 0px 0px #adbdc9;
   display: flex;
   padding: 5px 15px;
@@ -49,6 +59,12 @@ header h2, div{
 
 header div{
   text-align: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header> div> a{
+  height: 32px;
 }
 
 header h2{
@@ -82,6 +98,7 @@ header h2.title{
   font-family: 'Aguafina Script';
   font-size: 4em;
   margin-bottom: 0px;
+  text-shadow: 0px 0px 5px white;
 }
 
 .title{
