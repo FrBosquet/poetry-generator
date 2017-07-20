@@ -21,4 +21,13 @@ $(document).ready(()=>{
     console.log(`/verse/${targetId}`);
     window.location.replace(`/verse/${targetId}`);
   })
+
+  $('button#share').on('click', (e)=>{
+    let url = document.baseURI;
+    let targetId = $(e.target).attr('verseid');
+    url = url.replace('list',targetId);
+    let tweet = `Me ha gustado este verso en #poetry-generator : ${url}`;
+    let twitterBaseURL = `https://twitter.com/home?status=${encodeURIComponent(tweet)}`;
+    window.open(twitterBaseURL, '_blank');
+  })
 })

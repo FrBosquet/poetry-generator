@@ -1,7 +1,8 @@
+const dotenv = require('dotenv').config();
 const path = require('path');
 const rootPath = path.normalize(__dirname+'/../');
 
 module.exports = {
-  db: 'mongodb://localhost/poetry-generator',
+  db: process.env.MONGO_DB_URL,
   rootPath: rootPath
 };
