@@ -48,9 +48,6 @@ function pushTimes(array, word, times){
   }
 }
 
-// let firstSchema = ['2#_Papi','1@-adj','1@_who','1@_verb','1@_verb','1@_what','1@_how','1@_where', '1@_who', '1@-adj','1@_when'];
-let firstSchema = ['1#_hace tiempo','1@_who','1#_que','1@-where','1@_what','1@_when','1@_where','1@-when'];
-
 function verse(words){
 	return new Promise((resolve, reject)=>{
 
