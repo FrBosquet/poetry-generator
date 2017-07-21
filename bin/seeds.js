@@ -1,5 +1,6 @@
+require('dotenv').config({path: '../.env'});
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/poetry-generator');
+mongoose.connect(process.env.MONGO_DB_URL);
 const Word = require('../models/Word');
 
 const words = [
