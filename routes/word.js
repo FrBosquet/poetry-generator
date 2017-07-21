@@ -9,7 +9,7 @@ router.get('/list', WordController.listAll);
 
 router.get('/show/:id', WordController.listOne);
 
-router.get('/delete/:id', WordController.deleteOne);
+router.get('/delete/:id', WordController.delete);
 
 router.get('/byUser/:id', WordController.findUserWords);
 

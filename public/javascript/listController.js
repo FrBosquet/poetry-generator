@@ -1,21 +1,18 @@
 $(document).ready(()=>{
   console.log("ready");
 
-  $('button#detail').on('click',(e)=>{
-    console.log($(e.target).attr('wordid'));
-
-  })
-
-  $('button#delete').on('click',(e)=>{
+  $('button.delete').on('click',(e)=>{
+    console.log(e.target);
     let targetId = $(e.target).attr('wordid');
+    console.log('Borrar', targetId);
     let item = e.target.parentNode.parentNode;
-    console.log(item);
     $.ajax({
       url: `/words/delete/${targetId}`,
       method: 'GET'
     }).then((response)=>{
-      console.log(response);
       $(item).remove();
-    }).catch((err)=> console.log(err));
+    }).catch(
+      (err)=> console.log(err)
+    );
   })
 })

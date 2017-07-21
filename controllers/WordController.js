@@ -72,16 +72,17 @@ module.exports = {
       }
     });
   },
-  deleteOne: (req, res, next) => {
+  delete: (req, res, next) => {
     const wordId = req.params.id;
+    console.log("intentando borrar", wordId);
     Word.findByIdAndRemove(wordId, (err, doc) => {
       if (err) {
         console.log("error en delete word");
-      } else {
-        res.render('word/delete', {
-          deletedWord: doc
-        });
+        res.send('error en delete word')
+        return;
       }
+      res.send('palabra borrada correctamente');
+
     });
   },
   findUserWords: (req, res, next) => {

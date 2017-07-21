@@ -8,7 +8,7 @@ block content
         span
           h3 #{word.content}
         span
-          button(wordid='#{word._id}')#delete.button
+          button( wordid='#{word._id}' ).delete.button
             img(src="/images/delete.png")
   script(src='https://code.jquery.com/jquery-3.2.1.min.js')
   script(src='/javascript/listController.js')
