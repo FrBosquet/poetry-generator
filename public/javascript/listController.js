@@ -2,7 +2,6 @@ $(document).ready(()=>{
   console.log("ready");
 
   $('button.delete').on('click',(e)=>{
-    console.log(e.target);
     let targetId = $(e.target).attr('wordid');
     console.log('Borrar', targetId);
     let item = e.target.parentNode.parentNode;
