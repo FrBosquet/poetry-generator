@@ -64,7 +64,7 @@ header h2, div{
 header div{
   text-align: right;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 header> div> a{
@@ -184,5 +184,10 @@ form{
 
   header h2, header div{
     width: auto;
+  }
+
+  header div a{
+    font-size: 0.8em;
+    text-align: center;
   }
 }
