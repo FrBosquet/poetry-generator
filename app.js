@@ -16,7 +16,7 @@ const auth = require('./routes/auth');
 const word = require('./routes/word');
 
 app.use('/', index);
-app.use('/verse', ensureLogin.ensureLoggedIn('/auth/login'), verse);
+app.use('/verse', verse);
 app.use('/auth', auth);
 app.use('/words', ensureLogin.ensureLoggedIn('/auth/login'), word);
 
