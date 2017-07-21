@@ -26,7 +26,7 @@ $(document).ready(()=>{
     let url = document.baseURI;
     let targetId = $(e.target).attr('verseid');
     url = url.replace('list',targetId);
-    let tweet = `Me ha gustado este verso en #poetry-generator : ${url}`;
+    let tweet = `Me ha gustado este verso en #poetryGenerator : ${url}`;
     let twitterBaseURL = `https://twitter.com/home?status=${encodeURIComponent(tweet)}`;
     window.open(twitterBaseURL, '_blank');
   })
