@@ -13,7 +13,6 @@ $(document).ready(()=>{
         .then((response)=> {
           console.log(response.msg);
           $('#message').html(response.msg);
-          $('#formSelect').val('who');
           $('#formContent').val('');
         });
       } else {
